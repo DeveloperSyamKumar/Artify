@@ -38,6 +38,14 @@ router.post("/register", async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
+=======
+/**
+ * @route   POST /auth/login
+ * @desc    Login user & return JWT
+ */
+// POST /api/auth/login
+>>>>>>> 1e262422c859067a08ffb20913a59eb05b54a0e6
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -45,12 +53,18 @@ router.post("/login", async (req, res) => {
   if (!user) return res.status(400).json({ message: "User not found" });
 
   const validPassword = await bcrypt.compare(password, user.password);
+<<<<<<< HEAD
   if (!validPassword)
     return res.status(400).json({ message: "Invalid credentials" });
 
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
     expiresIn: "1h",
   });
+=======
+  if (!validPassword) return res.status(400).json({ message: "Invalid credentials" });
+
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+>>>>>>> 1e262422c859067a08ffb20913a59eb05b54a0e6
 
   res.json({
     token,
@@ -62,6 +76,13 @@ router.post("/login", async (req, res) => {
   });
 });
 
+<<<<<<< HEAD
+=======
+/**
+ * @route   GET /auth/profile
+ * @desc    Get basic user info (protected)
+ */
+>>>>>>> 1e262422c859067a08ffb20913a59eb05b54a0e6
 router.get("/profile", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
@@ -72,6 +93,7 @@ router.get("/profile", auth, async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 router.get("/me", auth, async (req, res) => {
   try {
     console.log("=== GET /me called ===");
@@ -106,10 +128,41 @@ router.get("/me", auth, async (req, res) => {
     console.log("=== GET /me finished ===");
   } catch (err) {
     console.error("Error in GET /me:", err);
+=======
+/**
+ * @route   GET /auth/me
+ * @desc    Get user + profile info (protected)
+ */
+// server/src/routes/auth.js
+router.get("/me", auth, async (req, res) => {
+  try {
+    // get user (without password)
+    const user = await User.findById(req.user.id).select("name email");
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    // get profile
+    const profile = await Profile.findOne({ user: req.user.id }).select(
+      "image location phone shippingAddress"
+    );
+
+    // merge both into one object
+    res.json({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      image: profile?.image || null,
+      phone: profile?.phone || null,
+      location: profile?.location || null,
+      shippingAddress: profile?.shippingAddress || null,
+    });
+  } catch (err) {
+    console.error("Error in /me:", err);
+>>>>>>> 1e262422c859067a08ffb20913a59eb05b54a0e6
     res.status(500).json({ message: "Server error" });
   }
 });
 
+<<<<<<< HEAD
 router.put("/me", auth, async (req, res) => {
   try {
     console.log("=== PUT /me called ===");
@@ -210,4 +263,6 @@ router.put("/me", auth, async (req, res) => {
 
 
 
+=======
+>>>>>>> 1e262422c859067a08ffb20913a59eb05b54a0e6
 export default router;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import jwt from "jsonwebtoken";
 // import dotenv from "dotenv";
 // dotenv.config();
@@ -37,6 +38,13 @@ import User from "../models/User.js";
 dotenv.config();
 
 export async function auth(req, res, next) {
+=======
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
+
+export function auth(req, res, next) {
+>>>>>>> 1e262422c859067a08ffb20913a59eb05b54a0e6
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -47,6 +55,7 @@ export async function auth(req, res, next) {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+<<<<<<< HEAD
 
     // Fetch user from DB to get role
     const user = await User.findById(decoded.id).select("-password");
@@ -62,6 +71,11 @@ export async function auth(req, res, next) {
     next();
   } catch (err) {
     console.error("Auth middleware error:", err);
+=======
+    req.user = decoded; // { id, email }
+    next();
+  } catch (err) {
+>>>>>>> 1e262422c859067a08ffb20913a59eb05b54a0e6
     return res.status(401).json({ message: "Invalid token" });
   }
 }

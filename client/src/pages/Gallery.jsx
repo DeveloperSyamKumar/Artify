@@ -5,10 +5,16 @@ const Gallery = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+<<<<<<< HEAD
     axios
       .get(`${import.meta.env.VITE_API_URL}/products`)
       .then((res) => setProducts(res.data))
       .catch((err) => console.error(err));
+=======
+    axios.get(`${import.meta.env.VITE_API_URL}/products`)
+      .then(res => setProducts(res.data))
+      .catch(err => console.error(err));
+>>>>>>> 1e262422c859067a08ffb20913a59eb05b54a0e6
   }, []);
 
   const handleAddToCart = async (product) => {
@@ -36,6 +42,7 @@ const Gallery = () => {
   };
 
   return (
+<<<<<<< HEAD
     // <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
     //   {products.map((p , _id) => (
     //     <div key={p._id} className="border rounded-lg p-4 shadow hover:shadow-lg transition">
@@ -127,6 +134,22 @@ const Gallery = () => {
 
           {/* Glow Effect */}
           <div className="absolute inset-0 rounded-2xl border border-white/5 shadow-[0_0_50px_10px_rgba(255,255,255,0.05)] pointer-events-none"></div>
+=======
+    <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {products.map((p) => (
+        <div key={p._id} className="border rounded-lg p-4 shadow hover:shadow-lg transition">
+          <img src={p.imageUrl} alt={p.title} className="w-full h-48 object-cover rounded" />
+          <h2 className="text-lg font-semibold mt-2">{p.title}</h2>
+          <p className="text-gray-500">{p.category}</p>
+          <p className="text-gray-600">{p.description}</p>
+          <p className="text-gray-800 font-medium mt-1">₹{p.price}</p>
+          <button
+            onClick={() => handleAddToCart(p)}
+            className="mt-3 w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+          >
+            Add to Cart
+          </button>
+>>>>>>> 1e262422c859067a08ffb20913a59eb05b54a0e6
         </div>
       ))}
     </div>
