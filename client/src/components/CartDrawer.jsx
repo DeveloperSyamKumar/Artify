@@ -55,11 +55,7 @@ export default function CartDrawer() {
 
   return (
     <div> 
-<<<<<<< HEAD
   
-=======
-      shyam
->>>>>>> 1e262422c859067a08ffb20913a59eb05b54a0e6
       {/* Toggle Button */}
       <button
         onClick={() => setOpen(!open)}

@@ -5,17 +5,13 @@ import { useNavigate } from "react-router-dom";
 export default function Profile() {
   const [me, setMe] = useState(null);
   const [orders, setOrders] = useState([]);
-<<<<<<< HEAD
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState({});
-=======
->>>>>>> 1e262422c859067a08ffb20913a59eb05b54a0e6
   const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
       try {
-<<<<<<< HEAD
         // ✅ Fetch merged user object
         const { data } = await api.get("/auth/me");
         setMe(data);
@@ -27,25 +23,10 @@ export default function Profile() {
       } catch (e) {
         console.error("❌ Error fetching profile or orders:", e);
         navigate("/login");
-=======
-        // ✅ Fetch merged user object from backend
-        const { data } = await api.get("/auth/me");
-        console.log("✅ /auth/me response:", data);
-        setMe(data);
-
-        // ✅ Fetch orders
-        const res = await api.get("/orders");
-        console.log("📦 Orders:", res.data);
-        setOrders(res.data);
-      } catch (e) {
-        console.error("❌ Error fetching profile or orders:", e);
-        navigate("/login"); // redirect if not authenticated
->>>>>>> 1e262422c859067a08ffb20913a59eb05b54a0e6
       }
     })();
   }, [navigate]);
 
-<<<<<<< HEAD
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -65,8 +46,6 @@ export default function Profile() {
     }
   };
 
-=======
->>>>>>> 1e262422c859067a08ffb20913a59eb05b54a0e6
   if (!me) {
     return <p className="p-4">Loading profile...</p>;
   }
@@ -86,7 +65,6 @@ export default function Profile() {
           className="w-24 h-24 rounded-full object-cover border"
         />
 
-<<<<<<< HEAD
         <div className="space-y-2 w-full">
           {!editing ? (
             <>
@@ -177,29 +155,6 @@ export default function Profile() {
               </div>
             </>
           )}
-=======
-        <div className="space-y-2">
-          <div>
-            <span className="font-semibold">Full Name: </span>
-            {me.name}
-          </div>
-          <div>
-            <span className="font-semibold">Email: </span>
-            {me.email}
-          </div>
-          <div>
-            <span className="font-semibold">Phone: </span>
-            {me.phone || "N/A"}
-          </div>
-          <div>
-            <span className="font-semibold">Location: </span>
-            {me.location || "N/A"}
-          </div>
-          <div>
-            <span className="font-semibold">Shipping Address: </span>
-            {me.shippingAddress || "N/A"}
-          </div>
->>>>>>> 1e262422c859067a08ffb20913a59eb05b54a0e6
         </div>
       </div>
 
